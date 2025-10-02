@@ -1,0 +1,40 @@
+---
+title: "Group: On Time Bus Arrivals"
+author: "Ashley Sofia Alfaro & Beryl Lau & Grace Stewart"
+date: "2025-09-25"
+output: html_document
+---
+
+## Bayesian Statistic: On Time Bus Arrivals 
+
+```{r libraries}
+library(tidyverse)
+library(bayesrules)
+library(here)
+```
+
+```{r, warning=FALSE}
+bus_ontime <- read_csv(here('data/hawaii_bus_ontime.csv'))
+```
+### Subset Data: Route 1
+
+```{r, warning=FALSE}
+route1 <- bus_ontime[bus_ontime$Route == "Route 1", ]
+```
+
+### Plot Prior
+
+```{r, warning=FALSE}
+plot_gamma(shape = 40, rate = 2, mode = TRUE, mean = TRUE)
+```
+
+```{r, warning=FALSE}
+sum(route1$OnTime_Arrivals)
+```
+
+### Plot Posterior
+
+```{r, warning=FALSE}
+plot_gamma_poisson(shape = 40, rate = 2, sum_y = 424, n = 10)
+```
+
